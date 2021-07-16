@@ -1,11 +1,14 @@
+import { IGenre } from "../useCases/Music/CreateMusic/CreateMusicDTO";
+
 export class Music {
   id: string;
   title: string;
   author: string;
-  date: Date;
+  date: string;
   file: string;
   genre: string[];
   album: string;
+  id_user:string;
 
   constructor(props: Omit<Music, "id">, id: string) {
     Object.assign(this, props);

@@ -1,15 +1,15 @@
-import { User } from '../../../entities/User'
-import { IUsersRepository } from '../../../repositories/IUsersRepository'
-import { APIError } from '../../../services/APIError'
-import { Authenticator } from '../../../services/Authenticator'
-import { HashManager } from '../../../services/HashManager'
-import { IdGenerator } from '../../../services/IdGenerator'
+import { User } from "../../../entities/User";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
+import { APIError } from "../../../services/APIError";
+import { Authenticator } from "../../../services/Authenticator";
+import { HashManager } from "../../../services/HashManager";
+import { IdGenerator } from "../../../services/IdGenerator";
 import {
   ICreateUserRequestDTO,
   ICreateUserResponseDTO,
   ICreateUserValidDataDTO,
-} from './CreateUserDTO'
-import { CreateUserValidator } from './CreateUserValidator'
+} from "./CreateUserDTO";
+import { CreateUserValidator } from "./CreateUserValidator";
 
 export class CreateUserUseCase {
   constructor(
@@ -21,28 +21,40 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(data: ICreateUserRequestDTO): Promise<ICreateUserResponseDTO> {
-    console.log("data",data)
-    const message = 'Sucess!'
-    const validData: ICreateUserValidDataDTO = this.validator.validate(data)
+   
+    const message = "Sucess!";
+    const validData: ICreateUserValidDataDTO = this.validator.validate(data);
 
-    const emailExist = await this.usersRepository.findByEmail(validData.email)
+    const emailExist = await this.usersRepository.findByEmail(validData.email);
+    const nickNameExist = await this.usersRepository.findByNickName(
+      validData.nickname
+    );
 
     if (emailExist) {
-      throw APIError.badRequest('Email already registered')
+      throw APIError.badRequest("Email already registered");
     }
 
-    const id = this.idGenerator.generate()
-    const passwordHash = await this.hashManager.hash(validData.password)
+    if (nickNameExist) {
+      throw APIError.badRequest(
+        "Nickname already registered.Choose another nickname"
+      );
+    }
 
-    const user = new User({ ...validData, password: passwordHash }, id)
-    await this.usersRepository.save(user)
-    await this.usersRepository.destroy()
+    if (validData.password.length < 6) {
+      throw APIError.badRequest("Password must be more than 6 digits");
+    }
+    const id = this.idGenerator.generate(); //gerei o id pra add user no banco
+    const passwordHash = await this.hashManager.hash(validData.password); //gerei um hash da senha
+
+    const user = new User({ ...validData, password: passwordHash }, id);//gerei um novo usuário completo, que vai direto pro banco
+    await this.usersRepository.save(user);
+    await this.usersRepository.destroy();
 
     const token = this.authenticator.generateToken({
       id: user.id,
       role: user.role,
-    })
+    });
 
-    return { message, token }
+    return { message, token };
   }
 }

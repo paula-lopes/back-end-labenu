@@ -31,4 +31,3 @@ export abstract class BaseRepository {
     }
   }
 }
-console.log(process.env.DB_HOST)
