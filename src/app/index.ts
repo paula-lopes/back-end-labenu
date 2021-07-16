@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 import express from "express";
 import { AddressInfo } from "net";
 import { router } from "./routes/router";
+import cors from "cors";
 dotenv.config();
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
