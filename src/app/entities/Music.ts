@@ -1,4 +1,4 @@
-import { IGenre } from "../useCases/Music/CreateMusic/CreateMusicDTO";
+
 
 export class Music {
   id: string;

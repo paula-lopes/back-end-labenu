@@ -1,5 +1,3 @@
-import { Music } from "../../../entities/Music";
-import { IGenre } from "../CreateMusic/CreateMusicDTO";
 export interface IReadAllMusicsRequestDTO {
   token: string;
 }
