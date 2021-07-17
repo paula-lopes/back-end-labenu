@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authenticateUserController = exports.authenticateUsersUseCase = void 0;
+const UserRepository_1 = require("../../../repositories/implementations/UserRepository");
+const Authenticator_1 = require("../../../services/Authenticator");
+const HashManager_1 = require("../../../services/HashManager");
+const AuthenticateUserController_1 = require("./AuthenticateUserController");
+const AuthenticateUserUseCase_1 = require("./AuthenticateUserUseCase");
+const AuthenticateUserValidator_1 = require("./AuthenticateUserValidator");
+const usersRepository = new UserRepository_1.UserRepository();
+const authenticateUserValidator = new AuthenticateUserValidator_1.AuthenticateUserValidator();
+const hashManager = new HashManager_1.HashManager();
+const authenticator = new Authenticator_1.Authenticator();
+const authenticateUsersUseCase = new AuthenticateUserUseCase_1.AuthenticateUserUseCase(usersRepository, authenticateUserValidator, hashManager, authenticator);
+exports.authenticateUsersUseCase = authenticateUsersUseCase;
+const authenticateUserController = new AuthenticateUserController_1.AuthenticateUserController(authenticateUsersUseCase);
+exports.authenticateUserController = authenticateUserController;

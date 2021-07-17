@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createMusicUseCase = exports.createMusicController = void 0;
+const CreateMusicController_1 = require("../../Music/CreateMusic/CreateMusicController");
+const MusicRepository_1 = require("../../../repositories/implementations/MusicRepository");
+const CreateMusicValidator_1 = require("../../Music/CreateMusic/CreateMusicValidator");
+const CreateMusicUseCase_1 = require("../../Music/CreateMusic/CreateMusicUseCase");
+const IdGenerator_1 = require("../../../services/IdGenerator");
+const Authenticator_1 = require("../../../services/Authenticator");
+const idGenerator = new IdGenerator_1.IdGenerator();
+const musicRepository = new MusicRepository_1.MusicRepository();
+const validator = new CreateMusicValidator_1.CreateMusicValidator();
+const authenticator = new Authenticator_1.Authenticator();
+const createMusicUseCase = new CreateMusicUseCase_1.CreateMusicUseCase(musicRepository, validator, idGenerator, authenticator);
+exports.createMusicUseCase = createMusicUseCase;
+const createMusicController = new CreateMusicController_1.CreateMusicController(createMusicUseCase);
+exports.createMusicController = createMusicController;
