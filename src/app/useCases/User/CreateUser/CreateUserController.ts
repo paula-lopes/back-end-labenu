@@ -13,7 +13,7 @@ export class CreateUserController {
         password: req.body.password,
         role: req.body.role,
       };
-      console.log(input);//CHEGOU AQUI
+
       const response = await this.CreateUserUseCase.execute(input);
 
       res.status(200).send(response);

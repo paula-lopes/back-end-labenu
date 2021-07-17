@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
-import { IAuthenticateUserRequestDTO } from './AuthenticateUserDTO'
-import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
+import { Request, Response } from "express";
+import { IAuthenticateUserRequestDTO } from "./AuthenticateUserDTO";
+import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 export class AuthenticateUserController {
   constructor(private AuthenticateUserUseCase: AuthenticateUserUseCase) {}
@@ -9,13 +9,14 @@ export class AuthenticateUserController {
       const input: IAuthenticateUserRequestDTO = {
         email: req.body.email,
         password: req.body.password,
-      }
+      };
+     
 
-      const response = await this.AuthenticateUserUseCase.execute(input)
+      const response = await this.AuthenticateUserUseCase.execute(input);
 
-      res.status(200).send(response)
+      res.status(200).send(response);
     } catch (error) {
-      res.status(400).send({ error: error.message })
+      res.status(400).send({ error: error.message });
     }
   }
 }

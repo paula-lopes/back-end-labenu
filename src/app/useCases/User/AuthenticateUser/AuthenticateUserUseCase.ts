@@ -20,7 +20,7 @@ export class AuthenticateUserUseCase {
   async execute(
     data: IAuthenticateUserRequestDTO
   ): Promise<IAuthenticateUserResponseDTO> {
-    const message = 'Sucess!'
+    const message = 'Success!'
     const validData: IAuthenticateUserValidDataDTO =
       this.validator.validate(data)
 
