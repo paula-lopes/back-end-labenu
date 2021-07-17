@@ -10,8 +10,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use(router);
+const port = process.env.PORT || 3003
 
-const server = app.listen(3003, () => {
+const server = app.listen(port, () => {
   if (server) {
     const address = server.address() as AddressInfo;
     console.log(`Servidor rodando em http://localhost:${address.port}`);
