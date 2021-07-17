@@ -12,7 +12,8 @@ const app = express_1.default();
 app.use(cors_1.default());
 app.use(express_1.default.json());
 app.use(router_1.router);
-const server = app.listen(3003, () => {
+const PORT = process.env.PORT || 3003;
+const server = app.listen(PORT, () => {
     if (server) {
         const address = server.address();
         console.log(`Servidor rodando em http://localhost:${address.port}`);
