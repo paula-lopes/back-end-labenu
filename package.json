@@ -4,7 +4,7 @@
   "description": "Projeto final de backend",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/app/index.ts",
+    "start": "nodemon ./src/index.ts",
     "dev": "ts-node-dev ./src/app/index.ts",
     "test": "jest",
     "migrations": "tsc && node ./build/src/database/migrations.js"
