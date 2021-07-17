@@ -1,2 +1,1 @@
-web: node build/src/app/index.js
-
+web: npm start
