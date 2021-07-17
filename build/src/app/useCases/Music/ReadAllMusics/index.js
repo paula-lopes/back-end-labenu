@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.readAllMusicsController = exports.readAllMusicsUseCase = void 0;
+const MusicRepository_1 = require("../../../repositories/implementations/MusicRepository");
+const Authenticator_1 = require("../../../services/Authenticator");
+const ReadAllMusicsController_1 = require("./ReadAllMusicsController");
+const ReadAllMusicsUseCase_1 = require("./ReadAllMusicsUseCase");
+const ReadAllMusicsValidator_1 = require("./ReadAllMusicsValidator");
+const musicRepository = new MusicRepository_1.MusicRepository();
+const validator = new ReadAllMusicsValidator_1.ReadAllMusicsValidator();
+const authenticator = new Authenticator_1.Authenticator();
+const readAllMusicsUseCase = new ReadAllMusicsUseCase_1.ReadAllMusicsUseCase(musicRepository, validator, authenticator);
+exports.readAllMusicsUseCase = readAllMusicsUseCase;
+const readAllMusicsController = new ReadAllMusicsController_1.ReadAllMusicsController(readAllMusicsUseCase);
+exports.readAllMusicsController = readAllMusicsController;
