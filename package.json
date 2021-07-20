@@ -7,7 +7,8 @@
     "start": "node build/src/app/index.js",
     "dev": "ts-node-dev ./src/app/index.ts",
     "test": "jest",
-    "migrations": "tsc && node ./build/src/database/migrations.js"
+    "migrations": "tsc && node ./build/src/database/migrations.js",
+    "build":"tsc"
   },
   "keywords": [
     "api",
